@@ -94,7 +94,7 @@ function M.setup(colors, config)
         fg = colors.method
     }, config)
     utils.highlight("@constructor", {
-        fg = colors.declaration
+        fg = colors.type
     }, config)
 
     -- Keywords
