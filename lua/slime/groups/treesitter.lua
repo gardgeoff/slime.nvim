@@ -175,10 +175,10 @@ function M.setup(colors, config)
 
     -- Identifiers
     utils.highlight("@variable", {
-        fg = colors.fg
+        fg = colors.property
     }, config)
     utils.highlight("@variable.builtin", {
-        fg = colors.fg,
+        fg = colors.property,
         italic = true
     }, config)
     utils.highlight("@variable.parameter", {
