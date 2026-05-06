@@ -221,7 +221,7 @@ function M.setup(colors, config)
 
     -- Tags (for markup languages)
     utils.highlight("@tag", {
-        fg = colors.declaration
+        fg = colors.type
     }, config)
     utils.highlight("@tag.attribute", {
         fg = colors.hint
