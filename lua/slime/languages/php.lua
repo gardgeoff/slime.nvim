@@ -47,6 +47,9 @@ function M.setup(colors, config)
     utils.highlight("@string.blade", {
         fg = colors.string
     }, config)
+    utils.highlight("@tag.blade", {
+        fg = colors.string
+    }, config)
 end
 
 return M
