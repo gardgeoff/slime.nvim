@@ -23,9 +23,9 @@ local semantic = {
 	operator = "#CCD2BE",
 
 	error = "#B64E4E",
-	warning = "#91B147",
+	warning = "#D8D29A",
 	info = "#6A9FB5",
-	hint = "#7B9C77",
+	hint = "#9AB383",
 
 	git_add = "#91B147",
 	git_change = "#D8D29A",
