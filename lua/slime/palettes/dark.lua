@@ -21,6 +21,7 @@ local semantic = {
 	string = "#8CAEC1",
 	number = "#B081B9",
 	operator = "#CCD2BE",
+	tag = "#C9B567",
 
 	error = "#B64E4E",
 	warning = "#D8D29A",
