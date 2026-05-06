@@ -224,7 +224,7 @@ function M.setup(colors, config)
         fg = colors.declaration
     }, config)
     utils.highlight("@tag.attribute", {
-        fg = colors.property
+        fg = colors.hint
     }, config)
     utils.highlight("@tag.delimiter", {
         fg = colors.operator
