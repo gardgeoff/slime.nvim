@@ -182,7 +182,7 @@ function M.setup(colors, config)
         italic = true
     }, config)
     utils.highlight("@variable.parameter", {
-        fg = colors.property,
+        fg = colors.property
     }, config)
     utils.highlight("@variable.member", {
         fg = colors.property
