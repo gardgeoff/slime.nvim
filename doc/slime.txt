@@ -1,0 +1,43 @@
+*slime.txt*  A Neovim port of the Slime VS Code theme
+
+==============================================================================
+USAGE                                                            *slime*
+
+    require("slime").setup({ ... })
+    vim.cmd.colorscheme("slime")
+
+`setup()` stores options. `:colorscheme slime` applies them.
+
+==============================================================================
+OPTIONS                                                  *slime-options*
+
+transparent       (boolean, default false)
+                  No background on Normal, sidebars, floats and terminals.
+
+terminal_colors   (boolean, default true)
+                  Set |g:terminal_color_0| through 15.
+
+styles            (table)
+                  Highlight attributes merged into comments, keywords,
+                  functions, variables and parameters. Defaults:
+                  comments and parameters italic.
+
+plugins           (table)
+                  `auto` (default true): with lazy.nvim, skip integrations
+                  for plugins that aren't installed. Set an integration to
+                  false to disable it, e.g. `telescope = false`.
+
+on_colors         (function(colors))
+                  Change palette values before groups are built.
+
+on_highlights     (function(highlights, colors))
+                  Change or add highlight groups.
+
+==============================================================================
+API                                                          *slime-api*
+
+require("slime").setup({opts})      Store options.
+require("slime").load({opts})       Apply the colorscheme.
+require("slime").colors({opts})     Resolved palette, for other plugins.
+
+ vim:tw=78:ts=8:ft=help:norl:

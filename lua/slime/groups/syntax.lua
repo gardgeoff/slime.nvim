@@ -1,152 +1,54 @@
 local utils = require("slime.utils")
 
-local M = {}
+-- Legacy (:syntax) groups. Treesitter groups mostly link back to these through Neovim's defaults.
+return function(c, opts)
+	local s = opts.styles
+	return {
+		Comment = utils.style({ fg = c.comment }, s.comments),
+		SpecialComment = { fg = c.comment },
+		Todo = { fg = c.token_warn, bold = true },
 
-function M.setup(colors, config)
-    -- Comments
-    utils.highlight("Comment", {
-        fg = colors.comment,
-        italic = config.italic_comments
-    }, config)
+		Constant = { fg = c.constant },
+		String = { fg = c.string },
+		Character = { fg = c.constant_other },
+		Number = { fg = c.number },
+		Float = { link = "Number" },
+		Boolean = { fg = c.boolean },
 
-    -- Constants
-    utils.highlight("Constant", {
-        fg = colors.string
-    }, config)
-    utils.highlight("String", {
-        fg = colors.string
-    }, config)
-    utils.highlight("Character", {
-        fg = colors.string
-    }, config)
-    utils.highlight("Number", {
-        fg = colors.number
-    }, config)
-    utils.highlight("Boolean", {
-        fg = colors.number
-    }, config)
-    utils.highlight("Float", {
-        fg = colors.number
-    }, config)
+		Identifier = utils.style({ fg = c.variable }, s.variables),
+		Function = utils.style({ fg = c.func }, s.functions),
 
-    -- Identifiers
-    utils.highlight("Identifier", {
-        fg = colors.fg
-    }, config)
-    utils.highlight("Function", {
-        fg = colors.func,
-        bold = config.bold_functions
-    }, config)
+		Statement = utils.style({ fg = c.keyword }, s.keywords),
+		Keyword = utils.style({ fg = c.keyword }, s.keywords),
+		Conditional = utils.style({ fg = c.control }, s.keywords),
+		Repeat = utils.style({ fg = c.control }, s.keywords),
+		Exception = utils.style({ fg = c.control }, s.keywords),
+		Label = { fg = c.control },
+		Operator = { fg = c.operator },
 
-    -- Statements
-    utils.highlight("Statement", {
-        fg = colors.keyword
-    }, config)
-    utils.highlight("Conditional", {
-        fg = colors.keyword
-    }, config)
-    utils.highlight("Repeat", {
-        fg = colors.keyword
-    }, config)
-    utils.highlight("Label", {
-        fg = colors.keyword
-    }, config)
-    utils.highlight("Operator", {
-        fg = colors.operator
-    }, config)
-    utils.highlight("Keyword", {
-        fg = colors.keyword,
-        italic = config.italic_keywords
-    }, config)
-    utils.highlight("Exception", {
-        fg = colors.keyword
-    }, config)
+		PreProc = { fg = c.storage_type },
+		Include = { fg = c.control_flow },
+		Define = { fg = c.storage_type },
+		Macro = { fg = c.storage_type },
+		PreCondit = { fg = c.storage_type },
 
-    -- PreProc
-    utils.highlight("PreProc", {
-        fg = colors.declaration
-    }, config)
-    utils.highlight("Include", {
-        fg = colors.declaration
-    }, config)
-    utils.highlight("Define", {
-        fg = colors.declaration
-    }, config)
-    utils.highlight("Macro", {
-        fg = colors.declaration
-    }, config)
-    utils.highlight("PreCondit", {
-        fg = colors.declaration
-    }, config)
+		Type = { fg = c.class },
+		StorageClass = { fg = c.modifier },
+		Structure = { fg = c.storage_type },
+		Typedef = { fg = c.storage_type },
 
-    -- Types
-    utils.highlight("Type", {
-        fg = colors.type
-    }, config)
-    utils.highlight("StorageClass", {
-        fg = colors.declaration
-    }, config)
-    utils.highlight("Structure", {
-        fg = colors.type
-    }, config)
-    utils.highlight("Typedef", {
-        fg = colors.type
-    }, config)
+		Special = { fg = c.escape },
+		SpecialChar = { fg = c.escape },
+		Tag = { fg = c.tag },
+		Delimiter = { fg = c.punctuation },
+		Debug = { fg = c.token_debug },
 
-    -- Special
-    utils.highlight("Special", {
-        fg = colors.accent2
-    }, config)
-    utils.highlight("SpecialChar", {
-        fg = colors.accent2
-    }, config)
-    utils.highlight("Tag", {
-        fg = colors.accent2
-    }, config)
-    utils.highlight("Delimiter", {
-        fg = colors.operator
-    }, config)
-    utils.highlight("SpecialComment", {
-        fg = colors.comment,
-        bold = true
-    }, config)
-    utils.highlight("Debug", {
-        fg = colors.accent2
-    }, config)
+		Underlined = { underline = true },
+		Ignore = { fg = c.comment },
+		Error = { fg = c.invalid, bg = c.error },
 
-    -- Underlined
-    utils.highlight("Underlined", {
-        fg = colors.accent3,
-        underline = true
-    }, config)
-
-    -- Ignore
-    utils.highlight("Ignore", {
-        fg = colors.comment
-    }, config)
-
-    -- Error
-    utils.highlight("Error", {
-        fg = colors.error,
-        bold = true
-    }, config)
-
-    -- Todo
-    utils.highlight("Todo", {
-        fg = colors.warning,
-        bold = true
-    }, config)
-
-    -- Added/Removed (for diffs)
-    utils.highlight("Added", {
-        fg = colors.git_add
-    }, config)
-    utils.highlight("Removed", {
-        fg = colors.git_delete
-    }, config)
-    utils.highlight("Changed", {
-        fg = colors.git_change
-    }, config)
+		Added = { fg = c.git_add },
+		Changed = { fg = c.git_modified },
+		Removed = { fg = c.git_delete },
+	}
 end
-
-return M

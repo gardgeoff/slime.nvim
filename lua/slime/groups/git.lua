@@ -1,82 +1,18 @@
 local utils = require("slime.utils")
 
-local M = {}
+-- Built-in diff groups. VS Code's slime doesn't set diff editor colors, so these tint the gutter colors.
+return function(c, opts)
+	return {
+		DiffAdd = { bg = utils.blend(c.bg_solid, c.git_add, 0.15) },
+		DiffChange = { bg = utils.blend(c.bg_solid, c.git_change, 0.3) },
+		DiffDelete = { fg = c.git_delete, bg = utils.blend(c.bg_solid, c.git_delete, 0.15) },
+		DiffText = { bg = utils.blend(c.bg_solid, c.git_change, 0.6) },
 
-function M.setup(colors, config)
-    -- GitSigns
-    utils.highlight("GitSignsAdd", {
-        fg = colors.git_add,
-        bg = colors.bg
-    }, config)
-    utils.highlight("GitSignsChange", {
-        fg = colors.git_change,
-        bg = colors.bg
-    }, config)
-    utils.highlight("GitSignsDelete", {
-        fg = colors.git_delete,
-        bg = colors.bg
-    }, config)
-    utils.highlight("GitSignsAddNr", {
-        fg = colors.git_add,
-        bg = colors.bg
-    }, config)
-    utils.highlight("GitSignsChangeNr", {
-        fg = colors.git_change,
-        bg = colors.bg
-    }, config)
-    utils.highlight("GitSignsDeleteNr", {
-        fg = colors.git_delete,
-        bg = colors.bg
-    }, config)
-    utils.highlight("GitSignsAddLn", {
-        bg = utils.blend(colors.git_add, colors.bg, 0.1)
-    }, config)
-    utils.highlight("GitSignsChangeLn", {
-        bg = utils.blend(colors.git_change, colors.bg, 0.1)
-    }, config)
-    utils.highlight("GitSignsDeleteLn", {
-        bg = utils.blend(colors.git_delete, colors.bg, 0.1)
-    }, config)
-
-    -- Git diff (built-in)
-    utils.highlight("DiffAdd", {
-        fg = colors.git_add,
-        bg = utils.blend(colors.git_add, colors.bg, 0.1)
-    }, config)
-    utils.highlight("DiffChange", {
-        fg = colors.git_change,
-        bg = utils.blend(colors.git_change, colors.bg, 0.1)
-    }, config)
-    utils.highlight("DiffDelete", {
-        fg = colors.git_delete,
-        bg = utils.blend(colors.git_delete, colors.bg, 0.1)
-    }, config)
-    utils.highlight("DiffText", {
-        fg = colors.fg,
-        bg = utils.blend(colors.git_change, colors.bg, 0.2)
-    }, config)
-
-    -- Gitsigns inline
-    utils.highlight("GitSignsAddInline", {
-        bg = utils.blend(colors.git_add, colors.bg, 0.2)
-    }, config)
-    utils.highlight("GitSignsChangeInline", {
-        bg = utils.blend(colors.git_change, colors.bg, 0.2)
-    }, config)
-    utils.highlight("GitSignsDeleteInline", {
-        bg = utils.blend(colors.git_delete, colors.bg, 0.2)
-    }, config)
-
-    -- Git conflict markers
-    utils.highlight("GitConflictCurrent", {
-        bg = utils.blend(colors.info, colors.bg, 0.1)
-    }, config)
-    utils.highlight("GitConflictIncoming", {
-        bg = utils.blend(colors.warning, colors.bg, 0.1)
-    }, config)
-    utils.highlight("GitConflictAncestor", {
-        bg = utils.blend(colors.hint, colors.bg, 0.1)
-    }, config)
+		diffAdded = { fg = c.git_add },
+		diffChanged = { fg = c.git_modified },
+		diffRemoved = { fg = c.git_delete },
+		diffFile = { fg = c.func },
+		diffLine = { fg = c.codelens },
+		diffIndexLine = { fg = c.comment },
+	}
 end
-
-return M

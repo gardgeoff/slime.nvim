@@ -1,0 +1,30 @@
+-- Telescope, styled after VS Code's quick open: input box over a widget-colored list.
+return function(c, opts)
+	return {
+		TelescopeNormal = { fg = c.fg, bg = c.float },
+		TelescopeBorder = { fg = c.float_border, bg = c.float },
+		TelescopeTitle = { fg = c.picker_group, bg = c.float, bold = true },
+		TelescopePromptNormal = { fg = c.input_fg, bg = c.input },
+		TelescopePromptBorder = { fg = c.input_border, bg = c.input },
+		TelescopePromptTitle = { fg = c.sidebar_title, bg = c.input, bold = true },
+		TelescopePromptPrefix = { fg = c.picker_group, bg = c.input },
+		TelescopePromptCounter = { fg = c.codelens, bg = c.input },
+		TelescopeResultsNormal = { link = "TelescopeNormal" },
+		TelescopeResultsBorder = { link = "TelescopeBorder" },
+		TelescopeResultsTitle = { link = "TelescopeTitle" },
+		TelescopePreviewNormal = { fg = c.fg, bg = c.bg },
+		TelescopePreviewBorder = { fg = c.float_border, bg = c.bg },
+		TelescopePreviewTitle = { fg = c.picker_group, bg = c.bg, bold = true },
+		TelescopePreviewLine = { bg = c.range },
+		TelescopeSelection = { fg = c.list_active_fg, bg = c.list_active },
+		TelescopeSelectionCaret = { fg = c.match, bg = c.list_active },
+		TelescopeMultiSelection = { fg = c.match },
+		TelescopeMultiIcon = { fg = c.match },
+		TelescopeMatching = { fg = c.match, bold = true },
+		TelescopeResultsComment = { fg = c.comment },
+		TelescopeResultsLineNr = { fg = c.line_nr_active },
+		TelescopeResultsDiffAdd = { fg = c.git_add },
+		TelescopeResultsDiffChange = { fg = c.git_modified },
+		TelescopeResultsDiffDelete = { fg = c.git_delete },
+	}
+end

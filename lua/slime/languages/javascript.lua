@@ -1,36 +1,38 @@
 local utils = require("slime.utils")
-local M = {}
 
-function M.setup(colors, config)
-	-- Treesitter (current group names, post-0.9)
-	utils.highlight("@keyword.function.javascript", { fg = colors.declaration }, config)
-	utils.highlight("@keyword.function.typescript", { fg = colors.declaration }, config)
-	utils.highlight("@function.javascript", { fg = colors.func }, config)
-	utils.highlight("@function.typescript", { fg = colors.func }, config)
-	utils.highlight("@function.method.javascript", { fg = colors.method }, config)
-	utils.highlight("@function.method.typescript", { fg = colors.method }, config)
-	utils.highlight("@function.method.call.javascript", { fg = colors.method }, config)
-	utils.highlight("@function.method.call.typescript", { fg = colors.method }, config)
-	utils.highlight("@variable.member.javascript", { fg = colors.property }, config)
-	utils.highlight("@variable.member.typescript", { fg = colors.property }, config)
-	utils.highlight("@variable.parameter.javascript", { fg = colors.fg, italic = true }, config)
-	utils.highlight("@variable.parameter.typescript", { fg = colors.fg, italic = true }, config)
-	utils.highlight("@type.javascript", { fg = colors.type }, config)
-	utils.highlight("@type.typescript", { fg = colors.type }, config)
-	utils.highlight("@constructor.javascript", { fg = colors.type }, config)
-	utils.highlight("@constructor.typescript", { fg = colors.type }, config)
-	utils.highlight("@string.template.javascript", { fg = colors.string }, config)
-	utils.highlight("@string.template.typescript", { fg = colors.string }, config)
-	utils.highlight("@punctuation.special.javascript", { fg = colors.accent2 }, config)
-	utils.highlight("@punctuation.special.typescript", { fg = colors.accent2 }, config)
+-- JavaScript, TypeScript and TSX. VS Code's slime has rules scoped to .js or .ts that differ from the base mapping.
+return function(c, opts)
+	local s = opts.styles
+	local hl = {}
 
-	-- JSX/TSX
-	utils.highlight("@tag.jsx", { fg = colors.declaration }, config)
-	utils.highlight("@tag.tsx", { fg = colors.declaration }, config)
-	utils.highlight("@tag.attribute.jsx", { fg = colors.property }, config)
-	utils.highlight("@tag.attribute.tsx", { fg = colors.property }, config)
-	utils.highlight("@tag.delimiter.jsx", { fg = colors.operator }, config)
-	utils.highlight("@tag.delimiter.tsx", { fg = colors.operator }, config)
+	for _, lang in ipairs({ "javascript", "typescript", "tsx" }) do
+		-- const/let/var/extends/static are storage.type in VS Code, but @keyword in treesitter
+		hl["@keyword." .. lang] = utils.style({ fg = c.storage_type }, s.keywords)
+		-- template literal ${ }
+		hl["@punctuation.special." .. lang] = { fg = c.template_expression }
+		-- new Foo(): entity.name.type.instance
+		hl["@constructor." .. lang] = { fg = c.type }
+		-- <Component />: support.class.component
+		hl["@tag." .. lang] = { fg = c.support }
+	end
+
+	-- comment.block.documentation.js (JSDoc); TypeScript doc comments use the plain comment color
+	hl["@comment.documentation.javascript"] = utils.style({ fg = c.comment_doc }, s.comments)
+
+	for _, lang in ipairs({ "typescript", "tsx" }) do
+		-- entity.name.function.ts
+		local func = utils.style({ fg = c.func_ts }, s.functions)
+		hl["@function." .. lang] = func
+		hl["@function.call." .. lang] = func
+		hl["@function.method." .. lang] = func
+		hl["@function.method.call." .. lang] = func
+		-- variable.parameter.ts has no rule of its own, so it falls back to `variable`
+		hl["@variable.parameter." .. lang] = utils.style({ fg = c.variable }, s.variables)
+		hl["@type." .. lang] = { fg = c.type } -- entity.name.type
+		hl["@type.builtin." .. lang] = { fg = c.type_primitive } -- support.type.primitive.ts
+		hl["@variable.builtin." .. lang] = { fg = c.this_ts } -- variable.language.this.ts
+		hl["@attribute." .. lang] = { fg = c.func_ts } -- punctuation.decorator.ts
+	end
+
+	return hl
 end
-
-return M

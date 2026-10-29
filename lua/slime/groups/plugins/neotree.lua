@@ -1,0 +1,42 @@
+-- Neo-tree, styled after the VS Code explorer.
+return function(c, opts)
+	return {
+		NeoTreeNormal = { fg = c.sidebar_fg, bg = c.sidebar },
+		NeoTreeNormalNC = { link = "NeoTreeNormal" },
+		NeoTreeEndOfBuffer = { fg = c.sidebar, bg = c.sidebar },
+		NeoTreeWinSeparator = { fg = c.border, bg = c.sidebar },
+		NeoTreeCursorLine = { bg = c.list_inactive },
+		NeoTreeTitleBar = { fg = c.sidebar_title, bg = c.sidebar_header, bold = true },
+		NeoTreeFloatBorder = { link = "FloatBorder" },
+		NeoTreeFloatTitle = { link = "FloatTitle" },
+		NeoTreeRootName = { fg = c.sidebar_title, bold = true },
+		NeoTreeDirectoryName = { fg = c.sidebar_fg },
+		NeoTreeDirectoryIcon = { fg = c.storage_type },
+		NeoTreeFileName = { fg = c.sidebar_fg },
+		NeoTreeFileNameOpened = { fg = c.sidebar_title },
+		NeoTreeFileIcon = { fg = c.sidebar_fg },
+		NeoTreeIndentMarker = { fg = c.indent_active },
+		NeoTreeExpander = { fg = c.codelens },
+		NeoTreeDimText = { fg = c.comment },
+		NeoTreeDotfile = { fg = c.comment },
+		NeoTreeHiddenByName = { fg = c.comment },
+		NeoTreeSymbolicLinkTarget = { fg = c.string },
+		NeoTreeModified = { fg = c.tab_modified },
+		NeoTreeMessage = { fg = c.comment },
+		NeoTreeFilterTerm = { fg = c.match, bold = true },
+		NeoTreeGitAdded = { fg = c.git_untracked },
+		NeoTreeGitDeleted = { fg = c.git_delete },
+		NeoTreeGitModified = { fg = c.git_modified },
+		NeoTreeGitConflict = { fg = c.error },
+		NeoTreeGitUntracked = { fg = c.git_untracked },
+		NeoTreeGitIgnored = { fg = c.comment },
+		NeoTreeGitStaged = { fg = c.git_add },
+		NeoTreeGitUnstaged = { fg = c.git_modified },
+
+		-- Source selector tabs (filesystem / buffers / git), referenced by name from neo-tree's config
+		SidebarTabActive = { fg = c.sidebar_title, bg = c.sidebar },
+		SidebarTabActiveSeparator = { fg = c.sidebar_header, bg = c.sidebar },
+		SidebarTabInactive = { fg = c.statusbar_fg, bg = c.sidebar_header },
+		SidebarTabInactiveSeparator = { fg = c.sidebar_header, bg = c.sidebar_header },
+	}
+end
