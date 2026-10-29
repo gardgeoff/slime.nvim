@@ -10,6 +10,7 @@ M.defaults = {
         auto_enable = true,
         telescope = true,
         neotree = true,
+        bufferline = true,
         rainbow = true
     },
     languages = {

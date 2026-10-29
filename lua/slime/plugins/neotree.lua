@@ -69,6 +69,24 @@ function M.setup(colors, config)
 	utils.highlight("NeoTreeExpander", {
 		fg = colors.comment,
 	}, config)
+
+	-- Source selector tabs (filesystem / buffers)
+	utils.highlight("SidebarTabActive", {
+		fg = colors.fg,
+		bg = colors.bg,
+	}, config)
+	utils.highlight("SidebarTabActiveSeparator", {
+		fg = colors.line,
+		bg = colors.bg,
+	}, config)
+	utils.highlight("SidebarTabInactive", {
+		fg = colors.comment,
+		bg = colors.line,
+	}, config)
+	utils.highlight("SidebarTabInactiveSeparator", {
+		fg = colors.line,
+		bg = colors.line,
+	}, config)
 end
 
 return M
